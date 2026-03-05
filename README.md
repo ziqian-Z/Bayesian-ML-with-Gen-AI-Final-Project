@@ -33,24 +33,17 @@ Key modeling goals include:
 
 
 
-# Data Type
+# Data 
 
-The project uses structured tabular data (.csv) containing borrower characteristics, loan attributes, and repayment outcomes.
+## Source
 
-Possible sources for credit-risk data include:
+We use only the Lending Club Loan Dataset, obtained from Kaggle:
+ 
+https://www.kaggle.com/datasets/adarshsng/lending-club-loan-data-csv/data
 
-### Public Loan-Level Credit Datasets
-- LendingClub Loan Data
+The dataset originates from Lending Club, a U.S.-based peer-to-peer lending platform that connects individual investors with borrowers. Investors provide capital for loans, and borrowers repay the loan principal with interest over time.
 
-### Credit Default Datasets with Repayment Behavior
-- UCI Credit Card Default Dataset
-
-### Synthetic Data
-- Simulated repayment trajectories for validation and controlled experiments
-
-
-
-# Dataset
+## Dataset Description
 
 This project primarily uses the Lending Club Loan Dataset, obtained from Kaggle.
 
@@ -135,19 +128,13 @@ Training the TabPFN model on the full dataset was computationally expensive and 
 
 ### Stage 1: Initial Sampling
 
-We first randomly sampled:
-
-50,000 observations
-
-from the cleaned dataset to create a manageable working dataset.
+We first randomly sampled **50,000 observations** from the cleaned dataset to create a manageable working dataset.
 
 ### Stage 2: Reduced Training Sample
 
 During model experimentation, we observed that training with 50,000 observations was still computationally slow for iterative experimentation and model tuning.
 
-Therefore, we further reduced the training sample to:
-
-20,000 observations
+Therefore, we further reduced the training sample to **20,000 observations**.
 
 This smaller dataset allows faster training and model evaluation while still preserving sufficient data diversity to capture meaningful credit risk patterns.
 
@@ -177,11 +164,11 @@ The modeling workflow follows these steps:
 3. Stratified sampling of the dataset
 4. One-hot encoding of categorical variables
 5. Train / validation / test split
-6. TabPFN model training
+6. TabPFN model fine-tuning
 7. Performance evaluation using predictive metrics
 
 
-# Expected Outcomes
+# Expected Outcomes (Need to change)
 
 The final model produces:
 
