@@ -1,7 +1,5 @@
 # Bayesian Modeling for Uncertainty-Aware Credit Risk Decisions
 
-## Application Area
-Finance / Risk Management
 
 
 # Project Overview
@@ -21,9 +19,9 @@ These probability estimates allow lenders to make risk-aware decisions under asy
 
 The primary modeling task is binary classification of loan outcomes, where the model estimates:
 
-[
-P(\text{default} = 1 \mid \text{borrower features})
-]
+
+$$P(\text{default} = 1 \mid \text{borrower features})$$
+
 
 The model outputs the probability of default rather than a hard decision boundary. This probabilistic approach allows downstream decision rules to be adjusted depending on the lender’s risk tolerance.
 
