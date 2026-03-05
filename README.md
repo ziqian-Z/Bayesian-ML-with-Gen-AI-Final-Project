@@ -3,7 +3,6 @@
 ## Application Area
 Finance / Risk Management
 
----
 
 # Project Overview
 
@@ -17,7 +16,6 @@ Rather than treating credit risk as a deterministic classification problem, we f
 
 These probability estimates allow lenders to make risk-aware decisions under asymmetric costs, where approving a risky borrower may lead to significant losses while rejecting a good borrower leads to opportunity cost.
 
----
 
 # Task Description
 
@@ -35,7 +33,7 @@ Key modeling goals include:
 - Evaluate model calibration and predictive performance
 - Compare predictive models in terms of accuracy and uncertainty awareness
 
----
+
 
 # Data Type
 
@@ -52,7 +50,7 @@ Possible sources for credit-risk data include:
 ### Synthetic Data
 - Simulated repayment trajectories for validation and controlled experiments
 
----
+
 
 # Dataset
 
@@ -99,13 +97,13 @@ These repayment status indicators allow us to construct a binary default variabl
 
 The dataset reflects real-world credit performance and is widely used for research in credit risk modeling.
 
----
+
 
 # Methodology
 
 ## Model
 
-The primary predictive model used in this project is TabPFN, a transformer-based model designed for tabular classification tasks.
+The primary predictive model used in this project is **TabPFN**, a transformer-based model designed for tabular classification tasks.
 
 TabPFN (Tabular Prior-Data Fitted Network):
 
@@ -129,7 +127,7 @@ This approach provides:
 - minimal feature engineering requirements
 - probabilistic output suitable for credit risk analysis
 
----
+
 
 ## Data Sampling Strategy
 
@@ -157,7 +155,7 @@ This smaller dataset allows faster training and model evaluation while still pre
 
 Sampling was performed randomly while maintaining the original class distribution of default outcomes.
 
----
+
 
 # Feature Engineering
 
@@ -171,7 +169,6 @@ Key preprocessing steps include:
 
 These steps ensure that the model only uses information available at the time of loan underwriting.
 
----
 
 # Modeling Pipeline
 
@@ -185,7 +182,6 @@ The modeling workflow follows these steps:
 6. TabPFN model training
 7. Performance evaluation using predictive metrics
 
----
 
 # Expected Outcomes
 
@@ -197,7 +193,7 @@ The final model produces:
 
 These results can be used to support uncertainty-aware credit decision-making in lending systems.
 
----
+
 
 # Summary
 
