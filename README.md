@@ -84,7 +84,7 @@ Loan performance indicators such as:
 - Charged Off
 - Default
 
-These repayment status indicators allow us to construct a binary default variable used for modeling.
+These repayment status indicators allow us to construct a **binary default** variable used for modeling.
 
 The dataset reflects real-world credit performance and is widely used for research in credit risk modeling.
 
@@ -105,8 +105,6 @@ TabPFN (Tabular Prior-Data Fitted Network):
 The model outputs probability estimates for binary outcomes, making it well suited for default risk prediction.
 
 The pretrained model is obtained from an open-source repository:
-
-TabPFN repository
 
 https://huggingface.co/Prior-Labs/TabPFN-v2-clf
 
@@ -132,7 +130,7 @@ We first randomly sampled **50,000 observations** from the cleaned dataset to cr
 
 ### Stage 2: Reduced Training Sample
 
-During model experimentation, we observed that training with 50,000 observations was still computationally slow for iterative experimentation and model tuning.
+During model experimentation, we observed that training with **50,000 observations** was still computationally slow for iterative experimentation and model tuning.
 
 Therefore, we further reduced the training sample to **20,000 observations**.
 
