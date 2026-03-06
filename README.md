@@ -120,6 +120,7 @@ By comparing these two models, we evaluate the trade-off between interpretabilit
 # Result (Need to change)
 
 ## Model Performance Metrics
+![alt text](image.png)
 
 ## Bayesian Logistic
 
