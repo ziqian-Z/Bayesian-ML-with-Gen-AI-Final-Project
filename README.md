@@ -1,5 +1,6 @@
 # Bayesian Modeling for Uncertainty-Aware Credit Risk Decisions
 
+Wendy Zhao, Zimeng Yang, Yiqin He
 
 
 # Project Overview
@@ -23,31 +24,20 @@ The primary modeling task is binary classification of loan outcomes, where the m
 $$P(\text{default} = 1 \mid \text{borrower features})$$
 
 
-The model outputs the probability of default rather than a hard decision boundary. This probabilistic approach allows downstream decision rules to be adjusted depending on the lender’s risk tolerance.
-
-Key modeling goals include:
-
-- Predict borrower default probability
-- Evaluate model calibration and predictive performance
-- Compare predictive models in terms of accuracy and uncertainty awareness
-
+This probabilistic approach allows downstream decision rules to be adjusted depending on the lender’s risk tolerance.
 
 
 # Data 
 
 ## Source
 
-We use only the Lending Club Loan Dataset, obtained from Kaggle:
+We use the Lending Club Loan Dataset, obtained from Kaggle:
  
 https://www.kaggle.com/datasets/adarshsng/lending-club-loan-data-csv/data
 
-The dataset originates from Lending Club, a U.S.-based peer-to-peer lending platform that connects individual investors with borrowers. Investors provide capital for loans, and borrowers repay the loan principal with interest over time.
+It originates from Lending Club, a U.S.-based peer-to-peer lending platform that connects individual investors with borrowers. Investors provide capital for loans, and borrowers repay the loan principal with interest over time.
 
 ## Dataset Description
-
-This project primarily uses the Lending Club Loan Dataset, obtained from Kaggle.
-
-Lending Club is a U.S.-based peer-to-peer lending platform that connects individual investors with borrowers. Investors provide capital while borrowers repay loans with interest over time.
 
 The dataset contains:
 
@@ -94,29 +84,23 @@ The dataset reflects real-world credit performance and is widely used for resear
 
 ## Data Pre-processing
 
-	•	Columns with extremely high missing rates were removed.
-	•	Post-origination variables that could cause data leakage (such as repayment outcomes or post-loan payment variables) were excluded.
-	•	Joint loan applications were filtered out to simplify the modeling framework.
-	•	Categorical variables were encoded using one-hot encoding.
-	•	High-cardinality features such as ZIP codes were aggregated into broader geographic categories.
-	•	Missing values in selected credit-history variables were handled using indicator variables and placeholder values.
+- Columns with extremely high missing rates were removed.
+- Post-origination variables that could cause data leakage (such as repayment outcomes or post-loan payment variables) were excluded.
+- Joint loan applications were filtered out to simplify the modeling framework.
+- Categorical variables were encoded using one-hot encoding.
+- High-cardinality features such as ZIP codes were aggregated into broader geographic categories.
+- Missing values in selected credit-history variables were handled using indicator variables and placeholder values.
+- Other missing values were handled using domain-informed imputation strategies.
 
 These steps ensure that the model only uses information available at the time of loan approval.
-
-## Feature Engineering
-
-- Handling missing values using domain-informed imputation strategies
-- Aggregation of high-cardinality categorical variables
-- One-hot encoding of categorical features for tabular model input
-- Creation of derived features such as credit behavior indicators
 
 ## Data Sampling
 
 Because the original dataset contains more than two million observations, a random subset of the data was used for experimentation.
-	•	First, 50,000 observations were randomly sampled from the cleaned dataset.
-	•	To reduce computational cost during model development, 20,000 observations were used for training and model experimentation.
+	•	50,000 observations were randomly sampled from the cleaned dataset.
+	•	To reduce computational cost for TapPFN construction, 20,000 observations were used for training and model experimentation.
 
-The sampling preserves the original class distribution of default and non-default observations.
+All sampling preserves the original class distribution of default and non-default observations.
 
 ## Model
 
