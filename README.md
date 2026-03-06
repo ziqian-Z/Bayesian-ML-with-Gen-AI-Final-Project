@@ -94,28 +94,17 @@ The dataset reflects real-world credit performance and is widely used for resear
 
 ## Model
 
-The primary predictive model used in this project is **TabPFN**, a transformer-based model designed for tabular classification tasks.
+We implement and compare two approaches for predicting borrower default risk: 
 
-TabPFN (Tabular Prior-Data Fitted Network):
+- a **Bayesian logistic regression** model and
 
-- Uses a transformer architecture
-- Is pretrained on large numbers of synthetic tabular tasks
-- Approximates Bayesian posterior predictions for tabular datasets
+- **TabPFN** (Tabular Prior-Data Fitted Network).
 
-The model outputs probability estimates for binary outcomes, making it well suited for default risk prediction.
+The Bayesian logistic regression serves as a baseline probabilistic model. It estimates the probability of borrower default using a logistic likelihood with Bayesian parameter estimation. By placing priors on the regression coefficients, the model provides interpretable relationships between borrower characteristics and default risk while allowing uncertainty in parameter estimates to be quantified through posterior distributions. 
 
-The pretrained model is obtained from an open-source repository:
+In addition to the Bayesian model, we apply TabPFN, a pretrained transformer-based foundation model designed for tabular prediction tasks. TabPFN is trained on a large collection of synthetic tabular datasets and learns a general algorithm for solving classification problems through in-context learning. Instead of training a model from scratch on each dataset, TabPFN can directly infer relationships between features and outcomes in a single forward pass. 
 
-https://huggingface.co/Prior-Labs/TabPFN-v2-clf
-
-In this project, the pretrained TabPFN model is fine-tuned using the Lending Club dataset, allowing it to adapt to the structure and patterns present in real-world credit data.
-
-This approach provides:
-
-- strong predictive performance
-- minimal feature engineering requirements
-- probabilistic output suitable for credit risk analysis
-
+By comparing these two models, we evaluate the trade-off between interpretability and uncertainty-aware inference offered by Bayesian logistic regression and the predictive power of modern transformer-based models for tabular data. This comparison allows us to assess whether advanced deep learning methods provide meaningful improvements over traditional statistical approaches in credit risk prediction.
 
 
 ## Data Sampling Strategy
