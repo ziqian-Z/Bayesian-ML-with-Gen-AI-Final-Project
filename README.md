@@ -92,6 +92,32 @@ The dataset reflects real-world credit performance and is widely used for resear
 
 # Methodology
 
+## Data Pre-processing
+
+	•	Columns with extremely high missing rates were removed.
+	•	Post-origination variables that could cause data leakage (such as repayment outcomes or post-loan payment variables) were excluded.
+	•	Joint loan applications were filtered out to simplify the modeling framework.
+	•	Categorical variables were encoded using one-hot encoding.
+	•	High-cardinality features such as ZIP codes were aggregated into broader geographic categories.
+	•	Missing values in selected credit-history variables were handled using indicator variables and placeholder values.
+
+These steps ensure that the model only uses information available at the time of loan approval.
+
+## Feature Engineering
+
+- Handling missing values using domain-informed imputation strategies
+- Aggregation of high-cardinality categorical variables
+- One-hot encoding of categorical features for tabular model input
+- Creation of derived features such as credit behavior indicators
+
+## Data Sampling
+
+Because the original dataset contains more than two million observations, a random subset of the data was used for experimentation.
+	•	First, 50,000 observations were randomly sampled from the cleaned dataset.
+	•	To reduce computational cost during model development, 20,000 observations were used for training and model experimentation.
+
+The sampling preserves the original class distribution of default and non-default observations.
+
 ## Model
 
 We implement and compare two approaches for predicting borrower default risk: 
@@ -107,66 +133,17 @@ In addition to the Bayesian model, we apply TabPFN, a pretrained transformer-bas
 By comparing these two models, we evaluate the trade-off between interpretability and uncertainty-aware inference offered by Bayesian logistic regression and the predictive power of modern transformer-based models for tabular data. This comparison allows us to assess whether advanced deep learning methods provide meaningful improvements over traditional statistical approaches in credit risk prediction.
 
 
-## Data Sampling Strategy
+# Result (Need to change)
 
-The raw Lending Club dataset contains over 2 million loan records after data cleaning and preprocessing.
+## Model Performance Metrics
 
-Training the TabPFN model on the full dataset was computationally expensive and required substantial GPU memory. To ensure efficient experimentation and reproducibility, we implemented a staged sampling strategy.
+## Bayesian Logistic
 
-### Stage 1: Initial Sampling
+## TapPFN
 
-We first randomly sampled **50,000 observations** from the cleaned dataset to create a manageable working dataset.
+## Comparison
 
-### Stage 2: Reduced Training Sample
+# Conclusion
 
-During model experimentation, we observed that training with **50,000 observations** was still computationally slow for iterative experimentation and model tuning.
+# Limit and Future Work
 
-Therefore, we further reduced the training sample to **20,000 observations**.
-
-This smaller dataset allows faster training and model evaluation while still preserving sufficient data diversity to capture meaningful credit risk patterns.
-
-Sampling was performed randomly while maintaining the original class distribution of default outcomes.
-
-
-
-# Feature Engineering
-
-Key preprocessing steps include:
-
-- Removal of post-origination variables to prevent data leakage
-- Handling missing values using domain-informed imputation strategies
-- Aggregation of high-cardinality categorical variables
-- One-hot encoding of categorical features for tabular model input
-- Creation of derived features such as credit behavior indicators
-
-These steps ensure that the model only uses information available at the time of loan underwriting.
-
-
-# Modeling Pipeline
-
-The modeling workflow follows these steps:
-
-1. Data cleaning and preprocessing
-2. Feature selection and engineering
-3. Stratified sampling of the dataset
-4. One-hot encoding of categorical variables
-5. Train / validation / test split
-6. TabPFN model fine-tuning
-7. Performance evaluation using predictive metrics
-
-
-# Expected Outcomes (Need to change)
-
-The final model produces:
-
-- Estimated probability of borrower default
-- Evaluation metrics such as ROC-AUC and classification accuracy
-- Insights into borrower risk patterns
-
-These results can be used to support uncertainty-aware credit decision-making in lending systems.
-
-
-
-# Summary
-
-This project applies modern tabular machine learning methods to the problem of credit risk prediction. By combining real-world Lending Club data with transformer-based tabular modeling, we aim to estimate borrower default probabilities and demonstrate how probabilistic predictions can support better financial decision-making under uncertainty.
