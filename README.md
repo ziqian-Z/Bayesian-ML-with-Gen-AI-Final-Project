@@ -83,7 +83,7 @@ These repayment status indicators are further constructed into a **binary defaul
 
 # Methodology
 
- This part describes the methods we used to estimate the borrowers' default risk. The analysis begins with data preprocessing to clean and prepare the Lending Club dataset for modeling. Key preprocessing steps include handling missing values, removing variables that may introduce data leakage, and transforming categorical features into machine-readable formats. Due to the large size of the dataset, a subset of the data was then sampled to ensure computational efficiency while preserving the original distribution of default and non-default outcomes. After preprocessing and sampling, model-specific feature engineering was applied to prepare the dataset for different modeling approaches. Finally, two models were implemented to estimate borrower default risk: a Bayesian Logistic Regression model, which provides interpretable probabilistic inference, and a TabPFN model, a transformer-based approach designed for tabular prediction.
+ This part describes the methods we used to estimate the borrowers' default risk. The analysis begins with data preprocessing to clean and prepare the Lending Club dataset for modeling. After preprocessing and sampling, model-specific feature engineering was applied to prepare the dataset for different modeling approaches. Finally, two models were implemented to estimate borrower default risk: a Bayesian Logistic Regression model, which provides interpretable probabilistic inference, and a TabPFN model, a transformer-based approach designed for tabular prediction.
 
 ## Data Pre-processing
 
