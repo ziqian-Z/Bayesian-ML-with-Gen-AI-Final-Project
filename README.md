@@ -115,7 +115,8 @@ We implement and compare two approaches for predicting borrower default risk:
 
 ### Bayesian Logistic Regression 
 
- Bayesian Logistic Regression models the binary loan outcome using a *Bernoulli likelihood* with a *logistic link function*. In this framework, the probability of default is determined by a linear combination of borrower features transformed through the logistic function. Unlike classical logistic regression, Bayesian logistic regression places probability distributions (priors) on the regression coefficients. During training, these priors are updated using the observed loan data to produce posterior distributions over the parameters. Predictions are then obtained by evaluating the posterior predictive distribution, which provides both estimated default probabilities and uncertainty about the model parameters. This approach offers strong interpretability, as the influence of each feature on default risk can be directly examined through the posterior coefficient estimates.
+Bayesian logistic regression models the binary loan outcome using a Bernoulli likelihood with a logistic link function, where the probability of default is determined by a linear combination of borrower features. Unlike classical logistic regression, the Bayesian approach places prior distributions on model coefficients and updates them with observed data to obtain posterior distributions. In this project, weakly informative Normal priors are used for the intercept and coefficients, and posterior inference is performed using variational inference (ADVI) for computational efficiency. The model provides predicted default probabilities through the posterior predictive distribution and offers strong interpretability, as the influence of each feature on default risk can be examined through the posterior coefficient estimates.
+
 
 ### TabPFN 
  TabPFN is a *transformer-based* foundation model designed for tabular data. Rather than learning model parameters solely from the given dataset, TabPFN has been pre-trained on a large number of synthetic tabular tasks. The model learns a general strategy for solving tabular classification problems and applies this strategy to new datasets through a process similar to in-context learning. During prediction, the model receives the training data and unlabeled samples as input and directly outputs predicted probabilities of default. Further information could be found: [
@@ -126,7 +127,17 @@ By comparing these two models, we evaluate the trade-off between interpretabilit
 
 ## Model Specific Feature Engineering
 
-### Bayesian Logistic
+### Bayesian Logistic 
+
+Although Bayesian logistic regression is a relatively simple and interpretable model, appropriate preprocessing is necessary to ensure numerical stability and reliable parameter estimation. The following feature engineering and preprocessing steps were therefore applied before training the Bayesian logistic model:
+
+- Continuous variables were standardized to improve numerical stability and facilitate efficient optimization.
+- Categorical variables were encoded using one-hot encoding to allow the linear model to capture category-specific effects.
+- Missing-value placeholders (e.g., 999) were converted to NaN before applying imputation procedures.
+- Post-origination variables that could introduce target leakage were removed to ensure that only borrower information available at the time of loan issuance was used.
+
+The final feature set focuses on borrower characteristics and credit profile variables available during loan origination, ensuring that the model reflects a realistic credit risk prediction setting.
+
 
 ### TabPFN
 
@@ -149,30 +160,29 @@ In addition to ROC-AUC, two diagnostic visualizations were used: **calibration c
 
 ## Bayesian Logistic
 
-### Model Description
+### ROC-AUC
 
-We implemented a Bayesian logistic regression model as an interpretable baseline for credit risk prediction. Logistic regression is a natural choice for binary default prediction because it directly models the probability of default through a sigmoid transformation of a linear combination of borrower features. In the Bayesian framework, model parameters are treated as random variables with prior distributions, which allows us to quantify uncertainty in coefficient estimates and predicted probabilities. In this implementation, we used weakly informative Normal priors for the intercept and coefficients and performed posterior inference using variational inference (ADVI), which provides an efficient approximation to the posterior distribution.
-
-To improve numerical stability and model performance, several preprocessing steps were applied. Continuous variables were standardized, categorical variables were encoded using one-hot encoding, and missing-value placeholders (e.g., 999) were converted to NaN before imputation. In addition, post-origination variables that would introduce target leakage were removed. The final feature set focuses on borrower characteristics and credit profile variables available at the time of loan issuance.
-
-### Model Performance
-
-![alt text](image-1.png)
+![alt text](Result/Logistics%20Result/AUC.png)
 
 The Bayesian logistic model achieved an AUC of 0.696, which indicates a moderate ability to rank higher-risk borrowers above lower-risk ones. The Brier score of 0.107 suggests that the predicted probabilities are reasonably well calibrated overall. The calibration curve further supports this observation: predicted probabilities generally follow the diagonal reference line, indicating that the model’s probability estimates are consistent with the observed default frequencies across probability bins.
 
+![alt text](Result/Logistics%20Result/Gemini_Generated_Image_6ecxmi6ecxmi6ecx.png)
 
 However, the confusion matrix highlights an important challenge typical in credit risk modeling: class imbalance. The dataset contains substantially more non-default cases than default cases. As a result, using a standard threshold of 0.5 leads to very high accuracy (0.869) driven mainly by correct predictions of non-defaults, but extremely low recall for defaults (0.007). In other words, the model rarely predicts default at the 0.5 threshold, which limits its usefulness for operational risk detection. This does not necessarily indicate poor model quality; rather, it reflects the mismatch between the threshold and the base rate of default events.
 
-### Top Coefficient Summary
+### Calibration Analysis
 
-<img width="934" height="547" alt="image" src="https://github.com/user-attachments/assets/dbf51e86-50ae-4707-af0b-bb1c2b77e4eb" />
+![alt text](Result/Logistics%20Result/image.png)
 
-To understand which borrower characteristics most strongly influence the predicted probability of default, we examined the posterior mean coefficients of the Bayesian logistic regression model. Because the model is linear in the log-odds space, larger positive coefficients indicate factors associated with higher default risk, while negative coefficients correspond to lower risk.
+The calibration curve indicates that the Bayesian logistic model produces reasonably well-calibrated probability estimates. Most points lie close to the diagonal reference line, suggesting that the predicted default probabilities align well with the observed default frequencies across probability bins. In particular, the model shows good calibration in the lower probability range, where most observations are concentrated. This implies that the model’s predicted probabilities provide a reliable estimate of relative default risk, which is important in credit risk applications where probability estimates are often used for ranking or risk scoring rather than strict classification decisions.
 
-Among the positive coefficients, the strongest risk indicators are related to loan purpose and credit grade. In particular, loans issued for small business purposes exhibit the largest positive coefficient (β ≈ 0.61), suggesting that these loans carry substantially higher default risk compared to other loan purposes. Similarly, lower credit grades such as grade F and grade E subgrades (e.g., E1, E2, D3) are strongly associated with increased default probability. This pattern is consistent with the LendingClub credit grading system, where lower grades reflect weaker borrower credit profiles. Additionally, a higher debt-to-income ratio (DTI) also increases default risk, which aligns with the intuition that borrowers with heavier debt burdens are more likely to experience repayment difficulties.
+### Top Coefficient Summary 
 
-On the other hand, several variables are associated with lower predicted default risk. The most prominent negative coefficient corresponds to DirectPay disbursement, which significantly reduces predicted default probability (β ≈ −1.83). This likely reflects the fact that DirectPay loans are often used to pay off existing credit card balances directly, thereby reducing borrower liquidity risk. Higher credit grades, especially grade A and subgrades A1–A3, also show strong negative coefficients, indicating that borrowers with stronger credit profiles are substantially less likely to default. Additionally, longer employment tenure (e.g., six years of employment) and certain verification statuses appear to reduce predicted risk.
+![alt text](Result/Logistics%20Result/Top%20Bayesian%20Logistic%20Coefficients.png)
+
+The posterior coefficient estimates reveal several meaningful relationships between borrower characteristics and default risk. Loans issued for small business purposes show the strongest positive association with default probability, likely reflecting the higher uncertainty of business income. Financial leverage indicators such as interest rate, debt-to-income ratio (DTI), and recent credit inquiries also increase predicted default risk, suggesting that borrowers with higher borrowing costs and heavier debt burdens are more likely to default.
+
+Conversely, several factors are associated with lower default probability. DirectPay disbursement has the largest negative coefficient, indicating that loans used directly for debt repayment may reduce financial stress. Additionally, variables related to financial stability, such as longer employment history and higher total credit limits, are linked to lower default risk. Overall, these coefficient patterns align with common credit risk principles, supporting the interpretability of the Bayesian logistic regression model.
 
 
 ## TabPFN
