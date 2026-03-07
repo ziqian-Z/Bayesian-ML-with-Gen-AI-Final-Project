@@ -87,7 +87,7 @@ These repayment status indicators are further constructed into a **binary defaul
 
 ## Data Pre-processing
 
-- Columns with extremely high missing rates were removed ( >95% missing values).
+- Columns with extremely high missing rates were removed (>95% missing values).
 - Post-origination variables that could cause data leakage (such as repayment outcomes or post-loan payment variables) were excluded.
 - Lending Club internal risk evaluation score (such as grade, sub-grade) were excluded.
 - Joint loan applications were filtered out to simplify the modeling framework.
