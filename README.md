@@ -119,6 +119,7 @@ By comparing these two models, we evaluate the trade-off between interpretabilit
 
 # Result (Need to change)
 
+
 ## Model Performance Metrics
 
 ## Bayesian Logistic
@@ -140,6 +141,8 @@ However, the confusion matrix highlights an important challenge typical in credi
 
 
 ## TapPFN
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1vJjomPtd3mIloP0Vk5gfwRBC8oGi9O__#scrollTo=bNK3shxdJuQh)
 
 ### ROC-AUC
 
