@@ -1,6 +1,6 @@
 # Bayesian Modeling for Uncertainty-Aware Credit Risk Decisions
 
-![Default risk meme](image.png)
+![Default risk meme](Layout/default%20risk%20meme.png)
 
 Wendy Zhao, Zimeng Yang, Yiqin He
 
