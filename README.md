@@ -83,12 +83,13 @@ These repayment status indicators are further constructed into a **binary defaul
 
 # Methodology
 
- The analysis begins with data preprocessing to clean and prepare the Lending Club dataset for modeling. Key preprocessing steps include handling missing values, removing variables that may introduce data leakage, and transforming categorical features into machine-readable formats. Due to the large size of the dataset, a subset of the data was then sampled to ensure computational efficiency while preserving the original distribution of default and non-default outcomes. After preprocessing and sampling, model-specific feature engineering was applied to prepare the dataset for different modeling approaches. Finally, two models were implemented to estimate borrower default risk: a Bayesian Logistic Regression model, which provides interpretable probabilistic inference, and a TabPFN model, a transformer-based approach designed for tabular prediction.
+ This part describes the methods we used to estimate the borrowers' default risk. The analysis begins with data preprocessing to clean and prepare the Lending Club dataset for modeling. Key preprocessing steps include handling missing values, removing variables that may introduce data leakage, and transforming categorical features into machine-readable formats. Due to the large size of the dataset, a subset of the data was then sampled to ensure computational efficiency while preserving the original distribution of default and non-default outcomes. After preprocessing and sampling, model-specific feature engineering was applied to prepare the dataset for different modeling approaches. Finally, two models were implemented to estimate borrower default risk: a Bayesian Logistic Regression model, which provides interpretable probabilistic inference, and a TabPFN model, a transformer-based approach designed for tabular prediction.
 
 ## Data Pre-processing
 
 - Columns with extremely high missing rates were removed ( >95% missing values).
 - Post-origination variables that could cause data leakage (such as repayment outcomes or post-loan payment variables) were excluded.
+- Lending Club internal risk evaluation score (such as grade, sub-grade) were excluded.
 - Joint loan applications were filtered out to simplify the modeling framework.
 
 These steps ensure that the model only uses information available at the time of loan approval.
@@ -129,7 +130,7 @@ By comparing these two models, we evaluate the trade-off between interpretabilit
 
 ### TabPFN
 
-Although TabPFN is designed to work effectively on tabular datasets with minimal preprocessing, certain feature engineering steps were still applied to ensure the dataset is suitable for modeling and to improve computational stability. In particular, categorical variables and high-cardinality features require structured representation, and missing values must be handled carefully to avoid introducing bias or losing important information. The following preprocessing steps were therefore applied before training the TabPFN model:
+Although TabPFN is designed to work effectively on tabular datasets with minimal preprocessing, certain feature engineering steps were still applied to ensure the dataset is suitable for modeling and to improve computational stability. The following preprocessing steps were therefore applied before training the TabPFN model:
 
 - Categorical variables were encoded using one-hot encoding.
 - High-cardinality features such as ZIP codes were aggregated into broader geographic categories.
