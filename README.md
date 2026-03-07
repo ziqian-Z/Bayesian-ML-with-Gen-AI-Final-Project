@@ -31,6 +31,8 @@ This probabilistic approach allows downstream decision rules to be adjusted depe
 
 # Data 
 
+This section describes the dataset used in this project. We use the Lending Club Loan Dataset, which contains detailed loan-level information on borrower characteristics, credit history, loan attributes, and repayment outcomes. The dataset provides a real-world view of consumer lending behavior and credit performance. For the purpose of this study, these variables are used to construct a binary default indicator and serve as inputs for modeling borrower default risk.
+
 ## Source
 
 We use the Lending Club Loan Dataset, obtained from Kaggle:
