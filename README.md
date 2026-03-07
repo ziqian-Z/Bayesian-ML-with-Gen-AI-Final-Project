@@ -101,7 +101,7 @@ Because the original dataset contains more than two million observations, a rand
 
  - 50,000 observations were randomly sampled from the cleaned dataset.
 
- - To reduce computational cost for TapPFN construction, 20,000 observations were used for training and model experimentation.
+ - To reduce computational cost for TabPFN construction, 20,000 observations were used for training and model experimentation.
 
 All sampling preserves the original class distribution of default and non-default observations.
 
@@ -136,8 +136,6 @@ Although TabPFN is designed to work effectively on tabular datasets with minimal
 - High-cardinality features such as ZIP codes were aggregated into broader geographic categories.
 - Missing values in selected credit-history variables were handled using indicator variables and placeholder values.
 - Other missing values were handled using domain-informed imputation strategies.
-
-These feature engineering steps help ensure that the model receives structured and interpretable inputs while reducing noise and sparsity in the dataset. Aggregating high-cardinality variables prevents the model from overfitting to extremely rare categories, while one-hot encoding allows categorical information to be represented without imposing artificial numerical relationships. Handling missing values through indicator variables also preserves potentially informative signals, such as the absence of prior delinquency records. Together, these preprocessing choices improve model stability and allow the TabPFN model to better capture meaningful patterns in borrower credit behavior.
 
 Additionally, due to computational constraints, the dataset was further sampled to 20,000 observations for training the model while preserving the original default and non-default class distribution.
 
