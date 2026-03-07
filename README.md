@@ -150,7 +150,9 @@ Among the positive coefficients, the strongest risk indicators are related to lo
 On the other hand, several variables are associated with lower predicted default risk. The most prominent negative coefficient corresponds to DirectPay disbursement, which significantly reduces predicted default probability (β ≈ −1.83). This likely reflects the fact that DirectPay loans are often used to pay off existing credit card balances directly, thereby reducing borrower liquidity risk. Higher credit grades, especially grade A and subgrades A1–A3, also show strong negative coefficients, indicating that borrowers with stronger credit profiles are substantially less likely to default. Additionally, longer employment tenure (e.g., six years of employment) and certain verification statuses appear to reduce predicted risk.
 
 
-## TapPFN
+## TabPFN
+
+Here is the link to the notebook has the complete workflow to train a TabPFN, including EDA, data preprocessing, modeling, and performance evaluation.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1vJjomPtd3mIloP0Vk5gfwRBC8oGi9O__#scrollTo=bNK3shxdJuQh)
 
