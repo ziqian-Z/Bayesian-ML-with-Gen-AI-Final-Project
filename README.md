@@ -74,9 +74,7 @@ Loan performance indicators such as:
 - Charged Off
 - Default
 
-These repayment status indicators allow us to construct a **binary default** variable used for modeling.
-
-The dataset reflects real-world credit performance and is widely used for research in credit risk modeling.
+These repayment status indicators are further constructed into a **binary default** variable used for modeling.
 
 
 
@@ -84,15 +82,12 @@ The dataset reflects real-world credit performance and is widely used for resear
 
 ## Data Pre-processing
 
-- Columns with extremely high missing rates were removed.
+- Columns with extremely high missing rates were removed ( >95% missing values).
 - Post-origination variables that could cause data leakage (such as repayment outcomes or post-loan payment variables) were excluded.
 - Joint loan applications were filtered out to simplify the modeling framework.
-- Categorical variables were encoded using one-hot encoding.
-- High-cardinality features such as ZIP codes were aggregated into broader geographic categories.
-- Missing values in selected credit-history variables were handled using indicator variables and placeholder values.
-- Other missing values were handled using domain-informed imputation strategies.
 
 These steps ensure that the model only uses information available at the time of loan approval.
+
 
 ## Data Sampling
 
@@ -119,10 +114,30 @@ In addition to the Bayesian model, we apply TabPFN, a pretrained transformer-bas
 By comparing these two models, we evaluate the trade-off between interpretability and uncertainty-aware inference offered by Bayesian logistic regression and the predictive power of modern transformer-based models for tabular data. This comparison allows us to assess whether advanced deep learning methods provide meaningful improvements over traditional statistical approaches in credit risk prediction.
 
 
+## Model Specific Feature Engineering
+
+### Bayesian Logistic
+
+### TabPFN
+
+Although TabPFN is designed to work effectively on tabular datasets with minimal preprocessing, certain feature engineering steps were still applied to ensure the dataset is suitable for modeling and to improve computational stability. In particular, categorical variables and high-cardinality features require structured representation, and missing values must be handled carefully to avoid introducing bias or losing important information. The following preprocessing steps were therefore applied before training the TabPFN model:
+
+- Categorical variables were encoded using one-hot encoding.
+- High-cardinality features such as ZIP codes were aggregated into broader geographic categories.
+- Missing values in selected credit-history variables were handled using indicator variables and placeholder values.
+- Other missing values were handled using domain-informed imputation strategies.
+
+These feature engineering steps help ensure that the model receives structured and interpretable inputs while reducing noise and sparsity in the dataset. Aggregating high-cardinality variables prevents the model from overfitting to extremely rare categories, while one-hot encoding allows categorical information to be represented without imposing artificial numerical relationships. Handling missing values through indicator variables also preserves potentially informative signals, such as the absence of prior delinquency records. Together, these preprocessing choices improve model stability and allow the TabPFN model to better capture meaningful patterns in borrower credit behavior.
+
+Additionally, due to computational constraints, the dataset was further sampled to 20,000 observations for training the model while preserving the original default and non-default class distribution.
+
 # Result (Need to change)
 
+Two models were implemented to estimate the probability that a borrower will default given the borrower’s characteristics: **Bayesian Logistic Regression (BLR)** and **TabPFN**. Although both models aim to estimate the same default probability, they differ in how the probability is learned and inferred. BLR relies on a probabilistic statistical framework with interpretable parameters, while TabPFN leverages a pretrained transformer architecture designed for tabular prediction. The results from these models are evaluated using several metrics and diagnostic plots, and their performance and trade-offs are compared in the following sections.
 
-## Model Performance Metrics
+The primary evaluation metric used in this project is the **Area Under the Receiver Operating Characteristic Curve (ROC-AUC)**. ROC-AUC measures the model’s ability to rank borrowers according to their risk of default across all possible classification thresholds. Because the objective of this project is to estimate default probabilities rather than to make a fixed approval or rejection decision, the ranking ability of the model is more informative than metrics that depend on a single decision threshold. A higher ROC-AUC indicates that the model more consistently assigns higher predicted risk to borrowers who actually default compared to those who do not.
+
+In addition to ROC-AUC, two diagnostic visualizations were used: **calibration curves** and **prediction distribution plots**. The calibration plot compares predicted default probabilities with observed default frequencies, indicating how well predicted risks match actual outcomes. The prediction distribution plot shows how predicted probabilities differ between default and non-default borrowers, illustrating the model’s ability to separate risky borrowers from safer ones.
 
 ## Bayesian Logistic
 
@@ -187,6 +202,8 @@ Despite this slight underestimation, the calibration pattern indicates that the 
 
 
 ## Comparison
+
+### Model Performance Metrics
 
 # Conclusion
 
