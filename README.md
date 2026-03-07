@@ -97,8 +97,10 @@ These steps ensure that the model only uses information available at the time of
 ## Data Sampling
 
 Because the original dataset contains more than two million observations, a random subset of the data was used for experimentation.
-	•	50,000 observations were randomly sampled from the cleaned dataset.
-	•	To reduce computational cost for TapPFN construction, 20,000 observations were used for training and model experimentation.
+
+ - 50,000 observations were randomly sampled from the cleaned dataset.
+
+ - To reduce computational cost for TapPFN construction, 20,000 observations were used for training and model experimentation.
 
 All sampling preserves the original class distribution of default and non-default observations.
 
