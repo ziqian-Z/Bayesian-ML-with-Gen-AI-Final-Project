@@ -138,6 +138,16 @@ The Bayesian logistic model achieved an AUC of 0.696, which indicates a moderate
 
 However, the confusion matrix highlights an important challenge typical in credit risk modeling: class imbalance. The dataset contains substantially more non-default cases than default cases. As a result, using a standard threshold of 0.5 leads to very high accuracy (0.869) driven mainly by correct predictions of non-defaults, but extremely low recall for defaults (0.007). In other words, the model rarely predicts default at the 0.5 threshold, which limits its usefulness for operational risk detection. This does not necessarily indicate poor model quality; rather, it reflects the mismatch between the threshold and the base rate of default events.
 
+### Top Coefficient Summary
+
+<img width="934" height="547" alt="image" src="https://github.com/user-attachments/assets/dbf51e86-50ae-4707-af0b-bb1c2b77e4eb" />
+
+To understand which borrower characteristics most strongly influence the predicted probability of default, we examined the posterior mean coefficients of the Bayesian logistic regression model. Because the model is linear in the log-odds space, larger positive coefficients indicate factors associated with higher default risk, while negative coefficients correspond to lower risk.
+
+Among the positive coefficients, the strongest risk indicators are related to loan purpose and credit grade. In particular, loans issued for small business purposes exhibit the largest positive coefficient (β ≈ 0.61), suggesting that these loans carry substantially higher default risk compared to other loan purposes. Similarly, lower credit grades such as grade F and grade E subgrades (e.g., E1, E2, D3) are strongly associated with increased default probability. This pattern is consistent with the LendingClub credit grading system, where lower grades reflect weaker borrower credit profiles. Additionally, a higher debt-to-income ratio (DTI) also increases default risk, which aligns with the intuition that borrowers with heavier debt burdens are more likely to experience repayment difficulties.
+
+On the other hand, several variables are associated with lower predicted default risk. The most prominent negative coefficient corresponds to DirectPay disbursement, which significantly reduces predicted default probability (β ≈ −1.83). This likely reflects the fact that DirectPay loans are often used to pay off existing credit card balances directly, thereby reducing borrower liquidity risk. Higher credit grades, especially grade A and subgrades A1–A3, also show strong negative coefficients, indicating that borrowers with stronger credit profiles are substantially less likely to default. Additionally, longer employment tenure (e.g., six years of employment) and certain verification statuses appear to reduce predicted risk.
+
 
 ## TapPFN
 
@@ -166,6 +176,8 @@ Although the two distributions overlap, there is a noticeable shift to the right
 The dashed diagonal line represents perfect calibration, where predicted probabilities match the actual default frequency. The model performs reasonably well in the lower probability region, where most borrowers are located. However, in the medium probability range the model tends to underestimate the true default rate, suggesting that higher-risk borrowers may have slightly greater default risk than the model predicts.
 
 Despite this slight underestimation, the calibration pattern indicates that the model provides useful probabilistic risk estimates rather than purely ranking borrowers.
+
+
 
 ## Comparison
 
