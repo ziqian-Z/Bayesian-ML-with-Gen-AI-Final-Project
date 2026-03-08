@@ -122,8 +122,6 @@ Bayesian logistic regression models the binary loan outcome using a Bernoulli li
  TabPFN is a *transformer-based* foundation model designed for tabular data. Rather than learning model parameters solely from the given dataset, TabPFN has been pre-trained on a large number of synthetic tabular tasks. The model learns a general strategy for solving tabular classification problems and applies this strategy to new datasets through a process similar to in-context learning. During prediction, the model receives the training data and unlabeled samples as input and directly outputs predicted probabilities of default. Further information could be found: [
 TabPFN-v2-clf](https://huggingface.co/Prior-Labs/TabPFN-v2-clf)
 
-By comparing these two models, we evaluate the trade-off between interpretability and uncertainty-aware inference offered by Bayesian logistic regression and the predictive power of modern transformer-based models for tabular data. This comparison allows us to assess whether advanced deep learning methods provide meaningful improvements over traditional statistical approaches in credit risk prediction.
-
 
 ## Model Specific Feature Engineering
 
@@ -166,9 +164,6 @@ In addition to ROC-AUC, two diagnostic visualizations were used: **calibration c
 
 The Bayesian logistic model achieved an AUC of 0.696, which indicates a moderate ability to rank higher-risk borrowers above lower-risk ones. The Brier score of 0.107 suggests that the predicted probabilities are reasonably well calibrated overall. The calibration curve further supports this observation: predicted probabilities generally follow the diagonal reference line, indicating that the model’s probability estimates are consistent with the observed default frequencies across probability bins.
 
-![alt text](Result/Logistics%20Result/Gemini_Generated_Image_6ecxmi6ecxmi6ecx.png)
-
-However, the confusion matrix highlights an important challenge typical in credit risk modeling: class imbalance. The dataset contains substantially more non-default cases than default cases. As a result, using a standard threshold of 0.5 leads to very high accuracy (0.869) driven mainly by correct predictions of non-defaults, but extremely low recall for defaults (0.007). In other words, the model rarely predicts default at the 0.5 threshold, which limits its usefulness for operational risk detection. This does not necessarily indicate poor model quality; rather, it reflects the mismatch between the threshold and the base rate of default events.
 
 ### Calibration Analysis
 
@@ -221,9 +216,15 @@ Despite this slight underestimation, the calibration pattern indicates that the 
 
 ## Comparison
 
-### Model Performance Metrics
+
 
 # Conclusion
+
+By predicting the default risk probability, we set personalized threshold for decision-making. [修改这一段]
+
+![alt text](Result/Logistics%20Result/Gemini_Generated_Image_6ecxmi6ecxmi6ecx.png)
+
+However, the confusion matrix highlights an important challenge typical in credit risk modeling: class imbalance. The dataset contains substantially more non-default cases than default cases. As a result, using a standard threshold of 0.5 leads to very high accuracy (0.869) driven mainly by correct predictions of non-defaults, but extremely low recall for defaults (0.007). In other words, the model rarely predicts default at the 0.5 threshold, which limits its usefulness for operational risk detection. This does not necessarily indicate poor model quality; rather, it reflects the mismatch between the threshold and the base rate of default events.
 
 # Limit and Future Work
 
