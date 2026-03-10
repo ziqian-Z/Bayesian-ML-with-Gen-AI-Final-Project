@@ -148,7 +148,7 @@ Although TabPFN is designed to work effectively on tabular datasets with minimal
 
 Additionally, due to computational constraints, the dataset was further sampled to 20,000 observations for training the model while preserving the original default and non-default class distribution.
 
-# Result (Need to change)
+# Result
 
 Two models were implemented to estimate the probability that a borrower will default given the borrower’s characteristics: **Bayesian Logistic Regression (BLR)** and **TabPFN**. Although both models aim to estimate the same default probability, they differ in how the probability is learned and inferred. BLR relies on a probabilistic statistical framework with interpretable parameters, while TabPFN leverages a pretrained transformer architecture designed for tabular prediction. The results from these models are evaluated using several metrics and diagnostic plots, and their performance and trade-offs are compared in the following sections.
 
@@ -214,8 +214,11 @@ Despite this slight underestimation, the calibration pattern indicates that the 
 
 
 
+# Discussion
+
 ## Comparison
 
+## Application
 
 
 # Conclusion
