@@ -262,7 +262,7 @@ Finally, the TabPFN model was only lightly fine-tuned due to computational const
 
 For future, not only additional feature engineering and more comprehensive hyperparameter tuning strategies are promising directions of improvement, investigate alternative machine learing models for tabular data, such as gradient boosting methods, are also useful benchmark for credit scoring. 
 
-Future studies could also incorporate more comprehensive cost-sensitive evaluation or decision analysis. Here we show an example of using default threshold (=0.5), however, this threshold should be further investigated based on business context, such as minimizing default losses or maximizing expected return under different approval thresholds.
+Future studies could also incorporate more comprehensive cost-sensitive evaluation or decision analysis, such as minimizing default losses or maximizing expected return under different approval thresholds.
 
 Finally, incorporating time-based or sequential credit data could improve the realism of the modeling framework. Modeling borrower behavior over time—such as payment patterns or evolving credit utilization—may allow the model to capture dynamic credit risk patterns that are not reflected in static borrower characteristics alone.
 
