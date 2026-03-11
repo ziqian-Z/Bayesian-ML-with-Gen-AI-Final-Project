@@ -240,11 +240,15 @@ Finally, the interpretability of the Bayesian logistic regression model provides
 
 # Conclusion
 
-By predicting the default risk probability, we set personalized threshold for decision-making. [修改这一段]
+Overall, the results highlight a clear trade-off between predictive performance and model interpretability in credit risk modeling.
 
-![alt text](Result/Logistics%20Result/Gemini_Generated_Image_6ecxmi6ecxmi6ecx.png)
+The TabPFN model achieved a slightly higher ROC-AUC (0.7075) compared with the Bayesian Logistic Regression model (0.696), indicating a modest advantage in distinguishing borrowers who default from those who do not. This improvement likely stems from TabPFN’s transformer-based architecture and its pretraining on a large number of synthetic tabular tasks, which enables the model to capture more complex nonlinear relationships and interactions among borrower features.
 
-However, the confusion matrix highlights an important challenge typical in credit risk modeling: class imbalance. The dataset contains substantially more non-default cases than default cases. As a result, using a standard threshold of 0.5 leads to very high accuracy (0.869) driven mainly by correct predictions of non-defaults, but extremely low recall for defaults (0.007). In other words, the model rarely predicts default at the 0.5 threshold, which limits its usefulness for operational risk detection. This does not necessarily indicate poor model quality; rather, it reflects the mismatch between the threshold and the base rate of default events.
+However, the Bayesian Logistic Regression model provides important advantages in terms of interpretability and transparency. By estimating posterior distributions for model coefficients, the Bayesian approach allows us to directly examine how borrower characteristics influence default risk. The resulting coefficient patterns align with well-established credit risk principles, making the model particularly useful in regulated financial environments where model explainability is essential. 
+
+In addition, the calibration analysis indicates that the Bayesian logistic model produces reasonably reliable probability estimates across most probability ranges. Well-calibrated probabilities are especially valuable in credit risk applications because lending decisions often rely on risk scoring, pricing, and capital allocation rather than simple binary classification outcomes. 
+
+Taken together, these results suggest that both models provide useful insights for credit risk prediction. TabPFN offers slightly stronger predictive discrimination, while Bayesian logistic regression provides greater interpretability and stable probability calibration. In practical applications, these approaches may complement each other: interpretable models can support regulatory explanations and policy decisions, while more flexible models can help identify complex patterns that improve predictive performance.
 
 # Limit and Future Work
 
