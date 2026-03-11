@@ -252,3 +252,17 @@ Taken together, these results suggest that both models provide useful insights f
 
 # Limit and Future Work
 
+One limitation of this study is the restricted feature engineering process. Although the dataset contains a large number of borrower and credit variables, only a subset of economically interpretable features was used. More sophisticated feature construction—such as interaction terms, nonlinear transformations, or engineered credit behavior indicators—may improve the model’s ability to capture complex relationships between borrower characteristics and default risk.
+
+Another limitation comes from the sampling strategy used for computational efficiency. Because the original dataset contains millions of observations, only a subset of the data was used to train the TabPFN model. While this approach makes experimentation feasible, it may reduce the model’s ability to fully learn the underlying distribution of borrower risk patterns present in the complete dataset.
+
+The study also focuses primarily on static borrower information at the time of loan origination. Credit risk is inherently dynamic, and borrower behavior may change over time. Without incorporating temporal information such as payment histories or evolving credit utilization, the models may miss important signals related to borrower financial behavior.
+
+Finally, the TabPFN model was only lightly fine-tuned due to computational constraints. A more extensive search over fine-tuning parameters and training configurations may lead to improved predictive performance.
+
+For future, not only additional feature engineering and more comprehensive hyperparameter tuning strategies are promising directions of improvement, investigate alternative machine learing models for tabular data, such as gradient boosting methods, are also useful benchmark for credit scoring. 
+
+Future studies could also incorporate more comprehensive cost-sensitive evaluation or decision analysis. Here we show an example of using default threshold (=0.5), however, this threshold should be further investigated based on business context, such as minimizing default losses or maximizing expected return under different approval thresholds.
+
+Finally, incorporating time-based or sequential credit data could improve the realism of the modeling framework. Modeling borrower behavior over time—such as payment patterns or evolving credit utilization—may allow the model to capture dynamic credit risk patterns that are not reflected in static borrower characteristics alone.
+
