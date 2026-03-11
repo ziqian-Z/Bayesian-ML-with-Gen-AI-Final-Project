@@ -162,7 +162,7 @@ In addition to ROC-AUC, two diagnostic visualizations were used: **calibration c
 
 ![alt text](Result/Logistics%20Result/AUC.png)
 
-The Bayesian logistic model achieved an AUC of 0.696, which indicates a moderate ability to rank higher-risk borrowers above lower-risk ones. The Brier score of 0.107 suggests that the predicted probabilities are reasonably well calibrated overall. The calibration curve further supports this observation: predicted probabilities generally follow the diagonal reference line, indicating that the model’s probability estimates are consistent with the observed default frequencies across probability bins.
+The Bayesian logistic model achieved an AUC of 0.686, which indicates a moderate ability to rank higher-risk borrowers above lower-risk ones. The Brier score of 0.107 suggests that the predicted probabilities are reasonably well calibrated overall. The calibration curve further supports this observation: predicted probabilities generally follow the diagonal reference line, indicating that the model’s probability estimates are consistent with the observed default frequencies across probability bins.
 
 
 ### Calibration Analysis
@@ -218,7 +218,7 @@ Despite this slight underestimation, the calibration pattern indicates that the 
 
 ## Comparison
 
-The two models demonstrate comparable predictive performance, with TabPFN achieving a slightly higher ROC-AUC (0.7075) than the Bayesian Logistic Regression model (0.696). This difference suggests that TabPFN has a modest advantage in ranking borrowers according to default risk. The improvement likely stems from TabPFN’s transformer-based architecture and its pretraining on a large number of synthetic tabular learning tasks, which allows the model to capture more complex nonlinear relationships and interactions among borrower features.
+The two models demonstrate comparable predictive performance, with TabPFN achieving a slightly higher ROC-AUC (0.7075) than the Bayesian Logistic Regression model (0.686). This difference suggests that TabPFN has a modest advantage in ranking borrowers according to default risk. The improvement likely stems from TabPFN’s transformer-based architecture and its pretraining on a large number of synthetic tabular learning tasks, which allows the model to capture more complex nonlinear relationships and interactions among borrower features.
 
 Despite this performance advantage, the Bayesian logistic regression model offers significant interpretability benefits. The model provides posterior coefficient estimates that clearly quantify how individual borrower characteristics influence default probability. These coefficients reveal economically meaningful patterns—such as the positive relationship between financial leverage indicators and default risk—making the model particularly useful in regulated financial environments where transparency and explainability are important. In contrast, TabPFN functions more as a black-box predictor: while it achieves slightly stronger discrimination performance, the internal decision process is not directly interpretable.
 
@@ -242,7 +242,7 @@ Finally, the interpretability of the Bayesian logistic regression model provides
 
 Overall, the results highlight a clear trade-off between predictive performance and model interpretability in credit risk modeling.
 
-The TabPFN model achieved a slightly higher ROC-AUC (0.7075) compared with the Bayesian Logistic Regression model (0.696), indicating a modest advantage in distinguishing borrowers who default from those who do not. This improvement likely stems from TabPFN’s transformer-based architecture and its pretraining on a large number of synthetic tabular tasks, which enables the model to capture more complex nonlinear relationships and interactions among borrower features.
+The TabPFN model achieved a slightly higher ROC-AUC (0.7075) compared with the Bayesian Logistic Regression model (0.686), indicating a modest advantage in distinguishing borrowers who default from those who do not. This improvement likely stems from TabPFN’s transformer-based architecture and its pretraining on a large number of synthetic tabular tasks, which enables the model to capture more complex nonlinear relationships and interactions among borrower features.
 
 However, the Bayesian Logistic Regression model provides important advantages in terms of interpretability and transparency. By estimating posterior distributions for model coefficients, the Bayesian approach allows us to directly examine how borrower characteristics influence default risk. The resulting coefficient patterns align with well-established credit risk principles, making the model particularly useful in regulated financial environments where model explainability is essential. 
 
