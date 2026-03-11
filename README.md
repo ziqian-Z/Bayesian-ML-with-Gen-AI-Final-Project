@@ -45,8 +45,8 @@ It originates from Lending Club, a U.S.-based peer-to-peer lending platform that
 
 The dataset contains:
 
-- ~890,000 loan observations
-- ~75 borrower and loan-level variables
+- ~20,000,000 loan observations
+- ~145 borrower and loan-level variables
 - Historical loan performance data
 
 Key feature groups include:
